@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tuto_app/features/joke/presentation/pages/joke_page.dart';
-import 'package:tuto_app/injection_container.dart' as di;
+import 'package:tuto_app/features/joke/presentation/pages/categories_page.dart';
+import 'package:tuto_app/injection_container/injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Chuck Norris',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      home: const JokePage(),
+      home: const CategoriesPage(),
     );
   }
 }

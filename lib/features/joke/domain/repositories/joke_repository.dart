@@ -5,4 +5,5 @@ import '../../../../core/error/failures.dart';
 
 abstract class JokeRepository {
   Future<Either<Failure, Joke>> fetchJoke();
+  Future<Either<Failure, Joke>> fetchJokeWithCategory(String category);
 }

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tuto_app/features/joke/presentation/bloc/cubit/joke_cubit.dart';
+import 'package:tuto_app/features/joke/presentation/bloc/cubit/categories/categories_cubit.dart';
 
-class JokeErrorWidget extends StatelessWidget {
-  const JokeErrorWidget({
+class CategoriesErrorWidget extends StatelessWidget {
+  const CategoriesErrorWidget({
     Key? key,
     required this.errorMsg,
   }) : super(key: key);
@@ -17,10 +17,11 @@ class JokeErrorWidget extends StatelessWidget {
       children: [
         Text(errorMsg),
         ElevatedButton(
-            onPressed: () {
-              BlocProvider.of<JokeCubit>(context).requestJoke();
-            },
-            child: const Text("Réessayer"))
+          onPressed: () {
+            BlocProvider.of<CategoriesCubit>(context).requestMenu();
+          },
+          child: const Text("Réessayer"),
+        )
       ],
     );
   }

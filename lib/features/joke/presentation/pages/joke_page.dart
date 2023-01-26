@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tuto_app/features/joke/presentation/bloc/cubit/joke_cubit.dart';
-import 'package:tuto_app/features/joke/presentation/widgets/joke_empty_widget.dart';
-import 'package:tuto_app/features/joke/presentation/widgets/joke_error_widget.dart';
-import 'package:tuto_app/features/joke/presentation/widgets/joke_loaded_widget.dart';
-import 'package:tuto_app/injection_container.dart';
+
+import '../../../../injection_container/injection_container.dart';
+import '../bloc/cubit/joke/joke_cubit.dart';
+import '../widgets/joke/joke_empty_widget.dart';
+import '../widgets/joke/joke_error_widget.dart';
+import '../widgets/joke/joke_loaded_widget.dart';
 
 class JokePage extends StatelessWidget {
-  const JokePage({super.key});
-
+  const JokePage({
+    Key? key,
+    this.category,
+  }) : super(key: key);
+  final String? category;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [_buildBody(context)]),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            _buildHeader(),
+            const Spacer(),
+            _buildBody(context),
+            const Spacer()
+          ]),
+        ),
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Text(
+      category != null ? category! : "Aléatoire",
+      style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w500),
     );
   }
 
@@ -25,6 +41,7 @@ class JokePage extends StatelessWidget {
       create: (_) => sl<JokeCubit>(),
       child: BlocBuilder<JokeCubit, JokeState>(
         builder: (context, state) {
+          state.category = category;
           if (state.jokeStatus == JokeStatus.empty) {
             return const JokeEmptyWidget();
           } else if (state.jokeStatus == JokeStatus.loading) {
